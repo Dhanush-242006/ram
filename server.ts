@@ -194,7 +194,7 @@ app.post("/api/packing-checklist", async (req, res) => {
     `;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.0-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -354,7 +354,7 @@ app.post("/api/validate-place", async (req, res) => {
     try {
       const aiResponse = await retryWithBackoff(async () => {
         return await client.models.generateContent({
-          model: "gemini-3.5-flash",
+          model: "gemini-2.0-flash",
           contents: prompt,
           config: {
             responseMimeType: "application/json",

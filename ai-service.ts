@@ -318,7 +318,7 @@ export async function generateTravelPlan(inputs: UserInputs): Promise<TravelPlan
     const ai = getGeminiClient();
     return await withRetry(async () => {
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
+        model: "gemini-2.0-flash",
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: {
           responseMimeType: "application/json",
@@ -372,7 +372,7 @@ export async function modifyTravelPlan(currentPlan: TravelPlan, instruction: str
     const ai = getGeminiClient();
     return await withRetry(async () => {
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-pro-preview",
+        model: "gemini-2.0-flash",
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: {
           responseMimeType: "application/json",
