@@ -386,17 +386,31 @@ app.post("/api/validate-place", async (req, res) => {
   });
 });
 
+app.get("/api/health", (req, res) => {
+  const groqKey = process.env.GROQ_API_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY;
+  res.json({
+    groq: groqKey ? (groqKey === "MY_GROQ_API_KEY" ? "placeholder" : "configured") : "missing",
+    gemini: geminiKey ? (geminiKey === "MY_GEMINI_API_KEY" ? "placeholder" : "configured") : "missing",
+  });
+});
+
 app.post("/api/generate-travel-plan", async (req, res) => {
   const { inputs } = req.body;
   if (!inputs) {
     return res.status(400).json({ error: "inputs parameter is required" });
   }
   try {
+    const groqKey = process.env.GROQ_API_KEY;
+    const geminiKey = process.env.GEMINI_API_KEY;
+    console.log("ENV CHECK — GROQ_API_KEY present:", !!groqKey, "| value starts with:", groqKey?.slice(0, 6));
+    console.log("ENV CHECK — GEMINI_API_KEY present:", !!geminiKey);
     const plan = await generateTravelPlan(inputs);
     return res.json(plan);
   } catch (err: any) {
     console.error("Server generate-travel-plan error:", err);
-    return res.status(500).json({ error: err.message || "Failed to generate travel plan" });
+    const detail = err?.error?.message || err?.message || String(err);
+    return res.status(500).json({ error: detail });
   }
 });
 
