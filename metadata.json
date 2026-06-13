@@ -1,0 +1,6 @@
+{
+  "name": "RAMSETUU",
+  "description": "An elite, AI-powered travel concierge that crafts bespoke itineraries with realistic logistics, curated stays, and professional-grade travel intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

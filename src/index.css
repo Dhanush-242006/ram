@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-primary: var(--bg-primary);
+  --color-secondary: var(--bg-secondary);
+  --color-accent: #6C5CE7;
+  --color-accent-light: #A29BFE;
+  --color-success: #00D2D3;
+  --color-border: var(--border-color);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+}
+
+:root {
+  --bg-primary: #0A0B10;
+  --bg-secondary: #0F111A;
+  --text-main: #FFFFFF;
+  --text-muted: #94A3B8; /* Slate 400 - clean readability in dark mode */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+
+  /* Theme-aware mapping variables to completely eliminate hardcoded overrides */
+  --tw-text-white: #FFFFFF;
+  --tw-text-white-80: rgba(255, 255, 255, 0.8);
+  --tw-text-white-60: rgba(255, 255, 255, 0.6);
+  --tw-text-white-50: rgba(255, 255, 255, 0.5);
+  --tw-text-white-40: rgba(255, 255, 255, 0.4);
+  --tw-text-white-30: rgba(255, 255, 255, 0.3);
+  --tw-text-white-20: rgba(255, 255, 255, 0.2);
+  --tw-text-white-10: rgba(255, 255, 255, 0.1);
+
+  --tw-bg-white-90: rgba(255, 255, 255, 0.9);
+  --tw-bg-white-10: rgba(255, 255, 255, 0.1);
+  --tw-bg-white-5: rgba(255, 255, 255, 0.05);
+  --tw-bg-white-2: rgba(255, 255, 255, 0.02);
+
+  --tw-border-white-10: rgba(255, 255, 255, 0.1);
+  --tw-border-white-5: rgba(255, 255, 255, 0.05);
+}
+
+:root.light {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --text-main: #0F172A; /* Slate 900 */
+  --text-muted: #475569; /* Slate 600 - High-contrast WCAG AAA compliant text-muted for light mode */
+  --border-color: #CBD5E1; /* Slate 300 - clearly visible borders */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+
+  /* Modern high-contrast equivalents of white variables in light mode */
+  --tw-text-white: #0F172A; /* Slate 900 */
+  --tw-text-white-80: #1E293B; /* Slate 800 */
+  --tw-text-white-60: #334155; /* Slate 700 */
+  --tw-text-white-50: #475569; /* Slate 600 - meets WCAG criteria for normal body text */
+  --tw-text-white-40: #475569; /* Slate 600 - ensure secondary texts remain fully readable */
+  --tw-text-white-30: #475569; /* Slate 600 */
+  --tw-text-white-20: #576574; /* Slate 650 - ensure packing items and action states are completely clear */
+  --tw-text-white-10: #64748B; /* Slate 500 */
+
+  --tw-bg-white-90: #F1F5F9; /* Slate 100 */
+  --tw-bg-white-10: #F1F5F9; /* Slate 100 */
+  --tw-bg-white-5: #E2E8F0; /* Slate 200 */
+  --tw-bg-white-2: #F1F5F9; /* Slate 100 */
+
+  --tw-border-white-10: #CBD5E1; /* Slate 300 */
+  --tw-border-white-5: #CBD5E1; /* Slate 300 */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-primary text-text-main antialiased selection:bg-accent selection:text-white font-sans;
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, .display-font {
+    @apply font-sans tracking-tighter;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[var(--glass-bg)] backdrop-blur-3xl border border-[var(--border-color)] rounded-[2.5rem] shadow-2xl;
+  }
+
+  :root.light .glass-card {
+    @apply shadow-xl shadow-slate-200/50;
+  }
+
+  .glass-input {
+    @apply w-full bg-[var(--glass-bg)] border border-[var(--border-color)] rounded-2xl px-5 py-4 text-sm text-[var(--text-main)] placeholder:text-[var(--text-muted)] focus:ring-1 focus:ring-accent/50 focus:border-accent/40 transition-all outline-none;
+  }
+
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4.5 bg-gradient-to-r from-accent to-[#4D8CFF] text-white font-bold rounded-2xl shadow-xl shadow-accent/20 hover:shadow-accent/40 transition-all active:scale-95 flex items-center justify-center gap-3 active:brightness-110;
+  }
+
+  .btn-premium::after {
+    content: '';
+    @apply absolute inset-0 bg-white/20 translate-x-[-100%] transition-transform duration-700 skew-x-[-20deg];
+  }
+
+  .btn-premium:hover::after {
+    @apply translate-x-[200%];
+  }
+
+  .serif-italic {
+    @apply font-serif italic;
+  }
+
+  .atmosphere {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 10% 10%, rgba(108, 92, 231, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 90% 90%, rgba(77, 140, 255, 0.08) 0%, transparent 50%),
+      var(--bg-primary);
+  }
+
+  :root.light .atmosphere {
+     background: 
+      radial-gradient(circle at 10% 10%, rgba(108, 92, 231, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 90% 90%, rgba(77, 140, 255, 0.03) 0%, transparent 50%),
+      #F8FAFC;
+  }
+
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.02;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3%3C/filter%3%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3%3C/svg%3");
+  }
+
+  /* Legacy layout compatibility mapping */
+  .professional-card {
+    @apply bg-[var(--glass-bg)] backdrop-blur-3xl border border-[var(--border-color)] rounded-[2.5rem] shadow-2xl p-8;
+  }
+  .period-card-themed { 
+    @apply bg-secondary/80 backdrop-blur-xl border border-[var(--border-color)] rounded-[2rem] overflow-hidden flex flex-col h-full shadow-lg; 
+  }
+  .transport-tag-themed { @apply flex items-center gap-2 text-[10px] text-accent-light bg-accent/10 px-3 py-1.5 rounded-lg font-bold w-fit border border-accent/20; }
+  .reminder-box-themed { @apply bg-[var(--glass-bg)] border border-[var(--border-color)] p-5 rounded-2xl text-[13px] leading-relaxed text-[var(--text-main)] opacity-80 italic; }
+  .card-title-label { @apply text-[10px] font-black text-accent-light px-3 py-1 bg-accent/10 border border-accent/20 rounded-full uppercase tracking-[0.2em] w-fit mb-6; }
+  .glass-sidebar { @apply bg-secondary/95 backdrop-blur-3xl border-r border-[var(--border-color)]; }
+  .flow-step-themed { @apply bg-white/[0.02] border border-[var(--border-color)] p-5 rounded-2xl transition-all cursor-pointer; }
+  .flow-step-themed.active { @apply border-accent bg-accent/10 scale-105 shadow-2xl shadow-accent/20; }
+}
+
+
+/* Clean theme-aware color mapping classes (eliminates legacy hardcoded overrides with true CSS variable binding) */
+.text-white { color: var(--tw-text-white); }
+.text-white\/80 { color: var(--tw-text-white-80); }
+.text-white\/60 { color: var(--tw-text-white-60); }
+.text-white\/50 { color: var(--tw-text-white-50); }
+.text-white\/40 { color: var(--tw-text-white-40); }
+.text-white\/30 { color: var(--tw-text-white-30); }
+.text-white\/20 { color: var(--tw-text-white-20); }
+.text-white\/10 { color: var(--tw-text-white-10); }
+
+.bg-white\/90 { background-color: var(--tw-bg-white-90); }
+.bg-white\/10 { background-color: var(--tw-bg-white-10); }
+.bg-white\/5 { background-color: var(--tw-bg-white-5); }
+.bg-white\/\[0\.02\] { background-color: var(--tw-bg-white-2); }
+
+.border-white\/10 { border-color: var(--tw-border-white-10); }
+.border-white\/5 { border-color: var(--tw-border-white-5); }
+
+/* Ensure high contrast for all text-muted and secondary elements globally */
+.text-text-muted { color: var(--text-muted); }
+.text-neutral-400 { color: var(--text-muted); }
+
+/* Double verification for critical components */
+:root.light .bg-white.text-primary {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+:root.light .bg-white.text-accent-light {
+  background-color: var(--tw-text-white);
+  color: #6C5CE7;
+}
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
