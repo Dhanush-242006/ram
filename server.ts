@@ -299,7 +299,7 @@ app.post("/api/validate-place", async (req, res) => {
               content: prompt
             }
           ],
-          model: "llama-3.3-70b-versatile",
+          model: "llama-3.1-8b-instant",
           response_format: { type: "json_object" }
         });
       }, 3, 400);

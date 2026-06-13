@@ -217,7 +217,7 @@ async function generateWithGroq(prompt: string): Promise<TravelPlan> {
       { role: "system", content: "You are an expert travel planner. Always return JSON." },
       { role: "user", content: prompt + "\n" + JSON_SCHEMA_PROMPT }
     ],
-    model: "llama-3.3-70b-versatile",
+    model: "llama-3.1-8b-instant",
     response_format: { type: "json_object" }
   });
 
@@ -233,7 +233,7 @@ async function modifyWithGroq(prompt: string): Promise<TravelPlan> {
       { role: "system", content: "You are an expert travel planner. Always return JSON matching the schema." },
       { role: "user", content: prompt + "\n" + JSON_SCHEMA_PROMPT }
     ],
-    model: "llama-3.3-70b-versatile",
+    model: "llama-3.1-8b-instant",
     response_format: { type: "json_object" }
   });
 
