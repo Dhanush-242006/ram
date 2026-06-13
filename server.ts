@@ -7,11 +7,6 @@ import Groq from "groq-sdk";
 import { generateTravelPlan, modifyTravelPlan } from "./ai-service";
 
 dotenv.config();
-try {
-  dotenv.config({ path: path.resolve(process.cwd(), '.env.example') });
-} catch (e) {
-  console.warn('Could not load .env.example in server.ts', e);
-}
 
 // Safely resolve path credentials for different environments (CJS/ESM compatibility)
 let __filename = "";
